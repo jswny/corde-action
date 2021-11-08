@@ -35,6 +35,7 @@ function generateConfig() {
   const channelID = core.getInput("channelID");
   const botPrefix = core.getInput("botPrefix");
   const testMatches = core.getInput("testMatches");
+  console.log(`"${testMatches}"`);
   const timeout = core.getInput("timeout");
   const config = new CordeConfig(
     cordeBotToken,
