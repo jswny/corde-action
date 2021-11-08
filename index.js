@@ -52,9 +52,12 @@ function generateConfig() {
 
 try {
   const config = generateConfig();
-  fs.writeFile("config.json", config);
-  exec("npx run test --config config.json");
-  core.setOutput("passed", true);
+  fs.writeFile("config.json", config, (err) => {
+    if (err) throw err;
+
+    exec("npm test");
+    core.setOutput("passed", true);
+  });
 } catch (error) {
   core.setFailed(error);
 }
