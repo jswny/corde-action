@@ -1,6 +1,5 @@
 const core = require("@actions/core");
-const github = require("@actions/github");
-const exec = require("child_process");
+const { exec } = require("child_process");
 const fs = require("fs");
 
 // Create the corde config file
@@ -55,8 +54,11 @@ try {
   fs.writeFile("config.json", config, (err) => {
     if (err) throw err;
 
-    exec("npm test");
-    core.setOutput("passed", true);
+    exec("npm test", (err, _in, _out) => {
+      if (err) throw err;
+
+      core.setOutput("passed", true);
+    });
   });
 } catch (error) {
   core.setFailed(error);
