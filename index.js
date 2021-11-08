@@ -51,12 +51,11 @@ function generateConfig() {
 
 try {
   const config = generateConfig();
-  fs.writeFile("config.json", config, (err) => {
+  fs.writeFile("corde.config.json", config, (err) => {
     if (err) throw err;
 
     exec("npm test", (err, stdout, stderr) => {
       if (err) {
-        console.log("Error running Corde:");
         console.log(stderr);
         throw err;
       }
