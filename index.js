@@ -54,9 +54,13 @@ try {
   fs.writeFile("config.json", config, (err) => {
     if (err) throw err;
 
-    exec("npm test", (err, _in, _out) => {
-      if (err) throw err;
+    exec("npm test", (err, stdout, stderr) => {
+      if (err) {
+        console.log(stderr);
+        throw err;
+      }
 
+      console.log(stdout);
       core.setOutput("passed", true);
     });
   });
