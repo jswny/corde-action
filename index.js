@@ -17,12 +17,12 @@ class CordeConfig {
     timeout
   ) {
     this.cordeBotToken = cordeBotToken;
-    this.botTestID = botTestID;
+    this.botTestId = botTestID;
     this.botToken = botToken;
-    this.guildID = guildID;
-    this.channelID = channelID;
+    this.guildId = guildID;
+    this.channelId = channelID;
     this.botPrefix = botPrefix;
-    this.testMatches = testMatches;
+    this.testMatches = [testMatches];
     this.timeout = timeout;
   }
 }
@@ -35,7 +35,6 @@ function generateConfig() {
   const channelID = core.getInput("channelID");
   const botPrefix = core.getInput("botPrefix");
   const testMatches = core.getInput("testMatches");
-  console.log(`"${testMatches}"`);
   const timeout = core.getInput("timeout");
   const config = new CordeConfig(
     cordeBotToken,
@@ -55,7 +54,7 @@ try {
   fs.writeFile("corde.config.json", config, (err) => {
     if (err) throw err;
 
-    exec("npm test", (err, stdout, stderr) => {
+    exec("npx corde", (err, stdout, stderr) => {
       if (err) {
         console.log(stderr);
         throw err;
