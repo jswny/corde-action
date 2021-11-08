@@ -56,6 +56,7 @@ try {
 
     exec("npm test", (err, stdout, stderr) => {
       if (err) {
+        console.log("Error running Corde:");
         console.log(stderr);
         throw err;
       }
